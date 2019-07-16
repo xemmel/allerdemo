@@ -7,7 +7,8 @@
 3. [Create a Subscription](#create-a-subscription)
 4. [Submit Events](#submit-events)
 
-
+19. [List Resources](#list-resources)
+20. [Clean up](#clean-up)
 
 ## Event Grid Topic Demo
 
@@ -40,10 +41,41 @@ $event_topic_key = ($eventgrid_topic | Get-AzEventGridTopicKey).Key1
 
 ### Create a Subscription
 
+#### A simple Subscription (GET-All)
+
+```powershell 
+
 Clear-Host
 $endpoint = "https://enuswcsnq5qr.x.pipedream.net/";
 New-AzEventGridSubscription  -ResourceGroupName $rg.ResourceGroupName -TopicName $eventgrid_topic.TopicName `
  -EventSubscriptionName subscriptionsimple -Endpoint $endpoint
+
+```
+
+#### Only orderEvent Subscription
+
+```powershell 
+
+Clear-Host
+$endpoint = "https://en68sphu3z3tq.x.pipedream.net/";
+New-AzEventGridSubscription  -ResourceGroupName $rg.ResourceGroupName -TopicName $eventgrid_topic.TopicName `
+ -EventSubscriptionName subscriptionordersOnly -Endpoint $endpoint -IncludedEventType @("orderEvent")
+
+```
+
+#### Only orderEvents only certain Customers
+
+```powershell
+
+Clear-Host
+$endpoint = "https://ensla6u2xaiqp.x.pipedream.net/";
+New-AzEventGridSubscription  -ResourceGroupName $rg.ResourceGroupName -TopicName $eventgrid_topic.TopicName `
+ -EventSubscriptionName subscriptionordersandcustomersOnly -Endpoint $endpoint -IncludedEventType @("orderEvent") `
+ -AdvancedFilter @(@{operator="StringIn"; key="data.customer"; Values=@("Aller","Egmont") })
+
+
+```
+
 
 [Back to Top](#table-of-content)
 
@@ -80,6 +112,29 @@ foreach {
     curl -Uri $event_topic_url -Method Post -Body $body -Headers @{"aeg-sas-key" = $event_topic_key}
 }
 
+
+```
+
+[Back to Top](#table-of-content)
+
+### List Resources
+
+```powershell
+
+Clear-Host
+Get-AzResource -ResourceGroupName $rg.ResourceGroupName | select Name, ResourceType, ResourceGroupName
+
+```
+
+[Back to Top](#table-of-content)
+
+### Clean up
+
+> Be sure that $rg points at the **Resource Group** to be deleted!
+```powershell
+
+Clear-Host
+Remove-AzResourceGroup -Name $rg.ResourceGroupName -Force
 
 ```
 
