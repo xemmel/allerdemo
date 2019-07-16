@@ -4,7 +4,8 @@
 ## Table of Content
 1. [Event Grid Topic Demo](#event-grid-topic-demo)
 2. [Create Event Grid Topic](#create-event-grid-topic)
-
+3. [Create a Subscription](#create-a-subscription)
+4. [Submit Events](#submit-events)
 
 
 
@@ -35,3 +36,52 @@ $event_topic_key = ($eventgrid_topic | Get-AzEventGridTopicKey).Key1
 ```
 
 [Back to Top](#table-of-content)
+
+
+### Create a Subscription
+
+Clear-Host
+$endpoint = "https://enuswcsnq5qr.x.pipedream.net/";
+New-AzEventGridSubscription  -ResourceGroupName $rg.ResourceGroupName -TopicName $eventgrid_topic.TopicName `
+ -EventSubscriptionName subscriptionsimple -Endpoint $endpoint
+
+[Back to Top](#table-of-content)
+
+
+### Submit Events
+
+```powershell
+
+Clear-Host
+"Aller Egmont DS Coop IBM MS".Split() |
+foreach {
+    $body = @"
+    [
+        {
+            "subject" : "testSubject",
+            "eventType" : "testEvent",
+            "id" : "$((New-Guid).Guid)",
+            "eventTime" : "$((Get-Date).ToString("yyyy-MM-ddTHH:mm:ss"))",
+            "data" : {
+                "customer" : "$_"
+            }
+        },
+            {
+            "subject" : "testSubject",
+            "eventType" : "orderEvent",
+            "id" : "$((New-Guid).Guid)",
+            "eventTime" : "$((Get-Date).ToString("yyyy-MM-ddTHH:mm:ss"))",
+            "data" : {
+                "customer" : "$_"
+            }
+        }
+    ]
+"@
+    curl -Uri $event_topic_url -Method Post -Body $body -Headers @{"aeg-sas-key" = $event_topic_key}
+}
+
+
+```
+
+[Back to Top](#table-of-content)
+
