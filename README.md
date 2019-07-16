@@ -6,7 +6,7 @@
 2. [Create Event Grid Topic](#create-event-grid-topic)
 3. [Create a Subscription](#create-a-subscription)
 4. [Submit Events](#submit-events)
-
+5. [Api Management](#Api Management)
 19. [List Resources](#list-resources)
 20. [Clean up](#clean-up)
 
@@ -139,4 +139,35 @@ Remove-AzResourceGroup -Name $rg.ResourceGroupName -Force
 ```
 
 [Back to Top](#table-of-content)
+
+
+
+### Api Management
+
+#### Call Old SOAP Service
+
+Url: http://xemmel.com/webservices/postnumber.asmx
+Method: Post
+Headers:
+
+```
+SOAPAction: 	http://tempuri.org/GetCity
+Content-Type: 	text/xml
+```
+Body: 
+
+```xml
+
+<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+	<Body>
+		<GetCity xmlns="http://tempuri.org/">
+    		<pPostNumber>4000</pPostNumber>
+    	</GetCity>
+	</Body>
+</Envelope>
+
+```
+
+[Back to Top](#table-of-content)
+
 
