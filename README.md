@@ -6,7 +6,7 @@
 2. [Create Event Grid Topic](#create-event-grid-topic)
 3. [Create a Subscription](#create-a-subscription)
 4. [Submit Events](#submit-events)
-5. [Api Management](#Api Management)
+5. [Api Management](#api-management)
 19. [List Resources](#list-resources)
 20. [Clean up](#clean-up)
 
@@ -167,6 +167,8 @@ Body:
 </Envelope>
 
 ```
+
+#### 
 
 [Back to Top](#table-of-content)
 
