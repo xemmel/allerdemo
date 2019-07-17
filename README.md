@@ -117,30 +117,6 @@ foreach {
 
 [Back to Top](#table-of-content)
 
-### List Resources
-
-```powershell
-
-Clear-Host
-Get-AzResource -ResourceGroupName $rg.ResourceGroupName | select Name, ResourceType, ResourceGroupName
-
-```
-
-[Back to Top](#table-of-content)
-
-### Clean up
-
-> Be sure that $rg points at the **Resource Group** to be deleted!
-```powershell
-
-Clear-Host
-Remove-AzResourceGroup -Name $rg.ResourceGroupName -Force
-
-```
-
-[Back to Top](#table-of-content)
-
-
 
 ### Api Management
 
@@ -240,3 +216,25 @@ Ocp-Apim-Subscription-Key: 529a799a71254c23aa66e54fecc68ec5;product=starter
 [Back to Top](#table-of-content)
 
 
+### List Resources
+
+```powershell
+
+Clear-Host
+Get-AzResource -ResourceGroupName $rg.ResourceGroupName | select Name, ResourceType, ResourceGroupName
+
+```
+
+[Back to Top](#table-of-content)
+
+### Clean up
+
+> Be sure that $rg points at the **Resource Group** to be deleted!
+```powershell
+
+Clear-Host
+Remove-AzResourceGroup -Name $rg.ResourceGroupName -Force
+
+```
+
+[Back to Top](#table-of-content)
