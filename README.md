@@ -122,7 +122,7 @@ foreach {
 
 #### Call Old SOAP Service
 
-Url: http://xemmel.com/webservices/postnumber.asmx
+Url: https://postnumbers.azurewebsites.net/Service.asmx
 Method: Post
 Headers:
 
@@ -137,7 +137,7 @@ Body:
 <Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
 	<Body>
 		<GetCity xmlns="http://tempuri.org/">
-    		<pPostNumber>4000</pPostNumber>
+    		<postnumber>8200</postnumber>
     	</GetCity>
 	</Body>
 </Envelope>
